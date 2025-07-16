@@ -1,11 +1,19 @@
 # Base image: Ruby with necessary dependencies for Jekyll
 FROM ruby:3.2
 
+# For Chinese region
 # Install dependencies
-RUN apt-get update && apt-get install -y \
+RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/* && \
+    apt-get update && apt-get install -y \
     build-essential \
     nodejs \
     && rm -rf /var/lib/apt/lists/*
+
+# Install dependencies
+# RUN apt-get update && apt-get install -y \
+#     build-essential \
+#     nodejs \
+#     && rm -rf /var/lib/apt/lists/*
 
 
 # Create a non-root user with UID 1000
